@@ -1,13 +1,888 @@
-<html>
-<body>
-	Página HTML 
-	<script type="text/javascript">
-		<!--
-		
-  Missa!
-			
-		//-->
-	</script>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pastoral Universitária UNICAMP - Folheto Digital</title>
+  <!-- Google Fonts: Outfit (Arredondada) e Playfair Display (Títulos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --blue-primary: #02a0db;    /* Azul Claro da marca */
+      --blue-dark: #064b6e;       /* Azul Escuro da marca */
+      --blue-bg-dark: #083c5a;    /* Fundo escuro da seção cantos */
+      --bg-light: #f8fafc;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --font-scale: 1;            /* Controle do botão A */
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.6;
+      transition: font-size 0.2s ease;
+    }
+
+    /* TYPOGRAPHY */
+    h1, h2, h3, .serif-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    /* HEADER FIXO */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 5%;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-svg {
+      height: 42px;
+      width: auto;
+    }
+
+    nav.main-nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    nav.main-nav button {
+      background: none;
+      border: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: calc(0.95rem * var(--font-scale));
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 8px 4px;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    nav.main-nav button.active {
+      color: var(--blue-primary);
+      font-weight: 600;
+    }
+
+    nav.main-nav button.active::after {
+      content: '';
+      position: absolute;
+      bottom: -13px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--blue-primary);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-font {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: var(--text-dark);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .btn-font:hover {
+      background: #f1f5f9;
+    }
+
+    .btn-pix {
+      background-color: var(--blue-primary);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: calc(0.85rem * var(--font-scale));
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .btn-pix:hover {
+      background-color: #028ac0;
+    }
+
+    /* SEÇÕES DE CONTEÚDO */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* SEÇÃO ADORAÇÃO - HERO (DIVISÃO 50/50 EXATA) */
+    .adoracao-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 67px);
+      width: 100%;
+    }
+
+    @media (max-width: 900px) {
+      .adoracao-hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+    }
+
+    .hero-left-blue {
+      background-color: var(--blue-primary);
+      color: white;
+      padding: 60px 8%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .tag-subtitle {
+      text-transform: uppercase;
+      font-size: calc(0.75rem * var(--font-scale));
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+      opacity: 0.95;
+      font-weight: 600;
+    }
+
+    .hero-title {
+      font-size: calc(3.5rem * var(--font-scale));
+      line-height: 1.08;
+      margin-bottom: 24px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      color: var(--blue-primary);
+      border: none;
+      padding: 14px 28px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: calc(0.95rem * var(--font-scale));
+      cursor: pointer;
+      width: fit-content;
+      margin-top: 20px;
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .hero-right-dark {
+      background-color: var(--blue-dark);
+      color: white;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ESTILO DA IMAGEM DA COLAGEM */
+    .colagem-img {
+      width: 98%;
+      max-width: 460px;
+      height: auto;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 16px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+      margin-bottom: 40px; /* Garante espaço para a caixa de citação no canto inferior */
+    }
+    
+
+    .quote-box {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      background: rgba(4, 30, 45, 0.85);
+      padding: 16px 20px;
+      border-radius: 8px;
+      max-width: 300px;
+      backdrop-filter: blur(6px);
+      border-left: 3px solid var(--blue-primary);
+    }
+
+    .quote-box p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: calc(1rem * var(--font-scale));
+    }
+
+    /* PALAVRAS PARA O SILÊNCIO */
+    .silencio-section {
+      background-color: var(--blue-dark);
+      color: white;
+      padding: 80px 8%;
+    }
+
+    .cards-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+
+    .silencio-card {
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 20px;
+    }
+
+    .silencio-card .num {
+      font-size: calc(0.85rem * var(--font-scale));
+      opacity: 0.6;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .silencio-card h3 {
+      font-size: calc(1.5rem * var(--font-scale));
+      margin-bottom: 12px;
+    }
+
+    /* CARD DE SÃO CARLO ACUTIS */
+    .acutis-section {
+      padding: 80px 8%;
+      background: #ffffff;
+    }
+
+    .acutis-container {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 40px;
+      align-items: stretch;
+      background: #f1f5f9;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+    }
+
+    @media (max-width: 850px) {
+      .acutis-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .acutis-img-wrapper {
+      background-color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .acutis-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      min-height: 380px;
+    }
+
+    .acutis-text {
+      padding: 40px;
+    }
+
+    .bio-highlight {
+      background: #e2e8f0;
+      border-left: 3px solid var(--blue-primary);
+      padding: 12px 16px;
+      margin: 16px 0;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.95rem;
+      font-style: italic;
+    }
+
+    /* SEÇÃO MISSA - HERO */
+    .missa-hero {
+      background-color: var(--blue-primary);
+      color: white;
+      padding: 80px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .missa-hero h1 {
+      font-size: calc(3.5rem * var(--font-scale));
+      margin-bottom: 12px;
+    }
+
+    /* LEITURAS E SALMO */
+    .leituras-section {
+      padding: 80px 8%;
+    }
+
+    .cards-grid-3-white {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 32px;
+    }
+
+    .white-card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-top: 4px solid var(--blue-primary);
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .white-card h3 {
+      font-size: calc(1.4rem * var(--font-scale));
+      color: var(--blue-dark);
+      margin-bottom: 12px;
+    }
+
+    /* CANTOS - ACCORDION */
+    .cantos-section {
+      background-color: var(--blue-bg-dark);
+      color: white;
+      padding: 80px 8%;
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      padding: 24px 0;
+    }
+
+    .accordion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .accordion-header h3 {
+      font-size: calc(1.6rem * var(--font-scale));
+    }
+
+    .accordion-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .accordion-body {
+      display: none;
+      padding-top: 20px;
+      color: #cbd5e1;
+      white-space: pre-line;
+      font-size: calc(1rem * var(--font-scale));
+    }
+
+    .accordion-item.open .accordion-body {
+      display: block;
+    }
+
+    .accordion-item.open .accordion-icon {
+      background: white;
+      color: var(--blue-dark);
+    }
+
+    /* MODAL PIX */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: white;
+      padding: 36px;
+      border-radius: 16px;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .btn-close {
+      margin-top: 24px;
+      background: #cbd5e1;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / CABEÇALHO -->
+  <header>
+    <div class="logo-container">
+      <img src="logo.jpg" alt="Logo Pastoral" style="height: 42px; width: auto; object-fit: contain;">
+    </div>
+
+    <nav class="main-nav">
+      <button class="nav-btn active" onclick="switchTab('adoracao')">Adoração</button>
+      <button class="nav-btn" onclick="switchTab('missa')">Missa</button>
+    </nav>
+
+    <div class="header-actions">
+      <button class="btn-font" onclick="toggleFontSize()" title="Aumentar/Restaurar Fonte">A</button>
+      <button class="btn-pix" onclick="openPixModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        PIX
+      </button>
+    </div>
+  </header>
+
+  <!-- PÁGINA 1: ADORAÇÃO -->
+  <main id="tab-adoracao" class="tab-content active">
+    
+    <section class="adoracao-hero">
+      <div class="hero-left-blue">
+        <div class="tag-subtitle">CELEBRAÇÃO ESPECIAL • QUINTA-FEIRA, DIA 15 DE OUTUBRO</div>
+        <h1 class="hero-title">Uma estrada<br>para o <em>Céu.</em></h1>
+        <p style="font-size: 1.1rem; opacity: 0.95;">Adoração e Santa Missa com a relíquia de primeiro grau de São Carlo Acutis, na Unicamp.</p>
+        <button class="btn-link" onclick="switchTab('missa')">Ver leituras e cantos &rsaquo;</button>
+        
+        <div style="margin-top: 48px; font-size: 0.9rem; opacity: 0.9;">
+          <strong>15/10, ÀS 12H15 </strong> <br> 
+          QUINTA-FEIRA UNICAMP &nbsp;|&nbsp; ☀️ EXPOSIÇÃO DA RELÍQUIA ANTES E APÓS A MISSA
+        </div>
+      </div>
+
+      <!-- LADO DIREITO COM A SUA COLAGEM -->
+      <div class="hero-right-dark">
+        <!-- ALTERE AQUI: Nome da sua imagem da colagem -->
+        <img src="colagem.jpg" alt="Colagem Adoração" class="colagem-img">
+
+        <div class="quote-box">
+          <p>"A Eucaristia é a minha estrada para o Céu."</p>
+          <small style="font-size: 0.8rem; color: #cbd5e1; font-family: 'Outfit', sans-serif;">SÃO CARLO ACUTIS</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- PALAVRAS PARA O SILÊNCIO -->
+    <section class="silencio-section">
+      <div class="tag-subtitle">DIANTE DE JESUS</div>
+      <h2 class="serif-title" style="font-size: 2.4rem; margin-bottom: 12px;">Permaneça o tempo que puder.</h2>
+      <p style="color: #cbd5e1; max-width: 620px; font-size: 1.05rem;">Este é um espaço de encontro pessoal. Chegue, silencie o coração e permaneça em oração pelo tempo que puder.</p>
+
+      <div class="cards-grid-3">
+        <div class="silencio-card">
+          <div class="num">01</div>
+          <h3>Presença</h3>
+          <p style="color: #cbd5e1; font-size: 0.95rem;">Jesus, eu creio que estás aqui. Acolhe tudo aquilo que hoje trago em meu coração.</p>
+        </div>
+        <div class="silencio-card">
+          <div class="num">02</div>
+          <h3>Entrega</h3>
+          <p style="color: #cbd5e1; font-size: 0.95rem;">Coloco diante de Ti meus estudos, minhas escolhas, meus medos e as pessoas que amo.</p>
+        </div>
+        <div class="silencio-card">
+          <div class="num">03</div>
+          <h3>Intercessão</h3>
+          <p style="color: #cbd5e1; font-size: 0.95rem;">São Carlo Acutis, ajuda-nos a encontrar na Eucaristia a força para viver a santidade.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARD BIOGRAFIA COM A FOTO DE SÃO CARLO ACUTIS -->
+    <section class="acutis-section">
+      <div class="acutis-container">
+        
+        <div class="acutis-img-wrapper">
+          <!-- ALTERE AQUI: Nome da sua foto de São Carlo Acutis -->
+          <img src="carlo.jpg" alt="São Carlo Acutis">
+        </div>
+        
+        <div class="acutis-text">
+          <div class="tag-subtitle" style="color: var(--blue-primary);">TESTEMUNHO & BIOGRAFIA</div>
+          <h2 class="serif-title" style="font-size: 2.2rem; color: var(--blue-dark); margin-bottom: 12px;">São Carlo Acutis</h2>
+          
+          <p style="font-size: 1rem; color: var(--text-dark); margin-bottom: 12px;">
+            Nascido em Londres em 1991 e criado em Milão, Carlo Acutis desde cedo demonstrou uma inclinação extraordinária para as coisas de Deus. Chamava a Eucaristia de <strong>"minha autoestrada para o Céu"</strong> e comungava diariamente a partir dos 7 anos de idade.
+          </p>
+
+          <div class="bio-highlight">
+            "A Virgem Maria é a única mulher da minha vida. O Rosário é a escada mais curta para subir ao Céu."
+          </div>
+
+          <h3 class="serif-title" style="font-size: 1.2rem; color: var(--blue-dark); margin-top: 16px; margin-bottom: 6px;">Vida de Oração e Devoção</h3>
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 12px;">
+            Além da Santa Missa diária, Carlo reservava momentos diários para a <strong>Adoração ao Santíssimo Sacramento</strong> antes ou depois da celebração. Ele rezava o Santo Terço todos os dias e mantinha uma profunda devoção a São Francisco de Assis.
+          </p>
+
+          <h3 class="serif-title" style="font-size: 1.2rem; color: var(--blue-dark); margin-top: 16px; margin-bottom: 6px;">Caridade Silenciosa e Tecnologia</h3>
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 12px;">
+            Pioneiro da evangelização digital, ele usou sua paixão pela programação para catalogar os milagres eucarísticos do mundo todo. Fora do computador, vivia uma caridade concreta: ajudava colegas que sofriam bullying, levava sacos de dormir e refeições para os moradores de rua em Milão com seu próprio dinheiro de mesada.
+          </p>
+
+          <p style="font-size: 0.95rem; color: var(--text-muted);">
+            Ao ser diagnosticado com uma leucemia fulminante aos 15 anos, offered todos os seus sofrimentos ao Senhor pelo Papa e pela Igreja Católica. Faleceu em 2006 e foi canonizado, tornando-o o primeiro santo da era digital.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PÁGINA 2: MISSA -->
+  <main id="tab-missa" class="tab-content">
+    
+    <section class="missa-hero">
+      <div>
+        <div class="tag-subtitle">FOLHETO DIGITAL</div>
+        <h1 class="serif-title">Santa Missa</h1>
+        <p style="opacity: 0.95; font-size: 1.1rem;">Leituras, salmo e cantos.</p>
+      </div>
+      <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+    </section>
+
+    <!-- LEITURAS E SALMO -->
+    <section class="leituras-section">
+      <div class="tag-subtitle" style="color: var(--blue-primary);">01 &nbsp; LITURGIA DA PALAVRA</div>
+      <h2 class="serif-title" style="font-size: 2.4rem; color: var(--blue-dark);">Leituras & salmo</h2>
+
+      <div class="cards-grid-3-white">
+        <div class="white-card">
+          <div class="tag-subtitle" style="color: var(--blue-primary);">PRIMEIRA LEITURA</div>
+          <h3 class="serif-title">Primeira leitura, Gl 2, 19-20</h3>
+          <p style="font-size: 0.95rem; color: var(--text-muted);">Leitura da Carta de São Paulo aos Gálatas <br>
+            Irmãos, foi em virtude da Lei que eu morri para a Lei, <br>
+            a fim de viver para Deus.<br>
+            Com Cristo, eu fui pregado na cruz. <br>
+            Eu vivo, mas não eu, é Cristo que vive em mim.<br>
+            Esta minha vida presente, na carne, eu a vivo na fé, <br> crendo no Filho de Deus, que me amou e por mim se entregou.<br>
+            Palavra do Senhor.<br> -R: Graças a Deus.
+          </p>
+        </div>
+
+        <div class="white-card">
+          <div class="tag-subtitle" style="color: var(--blue-primary);">Salmo Responsorial, Sl 111(112)</div>
+          <h3 class="serif-title">"É feliz quem respeita o Senhor!"</h3>
+          <p style="font-size: 0.95rem; color: var(--text-muted);">Feliz o homem que respeita o Senhor <br>e que ama com carinho a sua lei! <br>
+          Sua descendência será forte sobre a terra, abençoada a geração dos homens retos!<br><br>
+          Haverá glória e riqueza em sua casa, e permanece para sempre o bem que fez.<br>
+          Ele é correto, generoso e compassivo, como luz brilha nas trevas para os justos.<br><br>
+          Feliz o homem caridoso e prestativo, que resolve seus negócios com justiça.<br>
+          Porque jamais vacilará o homem reto, sua lembrança permanece eternamente!<br>
+          Ele não teme receber notícias más.<br><br>
+          Confiando em Deus, seu coração está seguro.<br>
+          Seu coração está tranquilo e nada teme, e confusos há de ver seus inimigos.<br><br>
+          Ele reparte com os pobres os seus bens,<br>
+          permanece para sempre o bem que fez, e crescerão a sua glória e seu poder.
+        </p>
+        </div>
+
+        <div class="white-card">
+          <div class="tag-subtitle" style="color: var(--blue-primary);">Evangelho</div>
+          <h3 class="serif-title">Evangelho, Mt 5, 13-16</h3>
+          <p style="font-size: 0.95rem; color: var(--text-muted);">"Naquele tempo, disse Jesus aos seus discípulos: <br>
+          'Vós sois o sal da terra. Ora, se o sal se tornar insosso,<br> com que salgaremos?<br> Ele não servirá para mais nada,<br>
+          senão para ser jogado fora e ser pisado pelos homens.<br> Vós sois a luz do mundo.<br> Não pode ficar escondida uma cidade construída sobre um monte.<br>
+          Ninguém acende uma lâmpada e a coloca debaixo de uma vasilha, mas sim, num candeeiro,<br> onde ela brilha para todos os que estão em casa.<br>
+          Assim também brilhe a vossa luz diante dos homens,<br> para que vejam as vossas boas obras <br>
+          e louvem o vosso Pai que está nos céus'.<br>
+          Palavra da Salvação. <br>-R: Glória a Vós, Senhor.'
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CANTOS -->
+    <section class="cantos-section">
+      <div class="tag-subtitle">02 &nbsp; CANTAR É REZAR DUAS VEZES</div>
+      <h2 class="serif-title" style="font-size: 2.6rem; margin-bottom: 36px;">Cantos</h2>
+
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div>
+            <div class="tag-subtitle" style="font-size: 0.75rem; opacity: 0.7;">01 &nbsp; ENTRADA</div>
+            <h3 class="serif-title">Canto de entrada</h3>
+          </div>
+          <div class="accordion-icon">+</div>
+        </div>
+        <div class="accordion-body">
+          Senhor, quem entrará no santuário pra Te louvar?
+          Senhor, quem entrará no santuário pra Te louvar?
+
+          Quem tem as mãos limpas e o coração puro
+          Quem não é vaidoso e sabe amar
+          Quem tem as mãos limpas e o coração puro
+          Quem não é vaidoso e sabe 
+          
+          Senhor, eu quero entrar no santuário pra Te louvar
+          Senhor, eu quero entrar no santuário pra Te louvar
+
+          Ó, dá-me mãos limpas, e um coração puro
+          Arranca a vaidade, ensina-me amar
+          Ó, dá-me mãos limpas, e um coração puro
+          Arranca a vaidade, ensina-me amar
+
+          Senhor, já posso entrar no santuário pra Te louvar?
+          Senhor, já posso entrar no santuário pra Te louvar?
+          
+          Teu sangue me lava, Teu fogo me queima
+          O Espírito Santo inunda meu ser
+          Teu sangue me lava, Teu fogo me queima
+          O Espírito Santo inunda meu ser
+
+        </div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div>
+            <div class="tag-subtitle" style="font-size: 0.75rem; opacity: 0.7;">02 &nbsp; OFERTÓRIO</div>
+            <h3 class="serif-title">Canto das oferendas</h3>
+          </div>
+          <div class="accordion-icon">+</div>
+        </div>
+        <div class="accordion-body">
+          Pão e vinho te apresentamos nesse altar
+          Como sinal que tu recolhes nossa oferta
+          Tudo o que somos deixamos aqui
+          Pão e vinho te apresentamos nesse altar
+          Como sinal, que tu recolhes nossa oferta
+          Tudo o que somos deixamos aqui
+
+          É um milagre que se dá
+          O pão e o vinho em corpo e sangue
+          Vão se transformar
+          Não há limites para o amor
+          Vem transformar também minha vida
+          Oh senhor, é teu esse milagre de amor
+
+          Pão e vinho te apresentamos nesse altar
+          Como sinal que tu recolhes nossa oferta
+          Tudo o que somos deixamos aqui
+          Pão e vinho te apresentamos nesse altar
+          Como sinal que tu recolhes nossa oferta
+          Tudo o que somos deixamos aqui
+
+          É um milagre que se dá
+          O pão e o vinho em corpo e sangue
+          Vão se transformar
+          Não há limites para o amor
+          Vem transformar também minha vida
+          Oh senhor, é teu esse milagre de amor
+          É teu esse milagre de amor
+          É teu esse milagre de amor
+
+        </div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div>
+            <div class="tag-subtitle" style="font-size: 0.75rem; opacity: 0.7;">03 &nbsp; COMUNHÃO</div>
+            <h3 class="serif-title">Canto de comunhão</h3>
+          </div>
+          <div class="accordion-icon">+</div>
+        </div>
+        <div class="accordion-body">
+          Desde o princípio
+          Antes mesmo que a terra começasse a existir
+          O verbo estava junto a Deus
+          Veio ao mundo
+          E pra não abandonar-nos nesta viagem nos deixou
+          Todo a si mesmo como pão
+
+          Verbum caro factum est
+          Verbum panis factum est
+          Verbum caro factum est
+          Verbum panis factum est
+
+          E aqui, partes o teu pão em meio a nós
+          Todo aquele que comer, não terá mais fome
+          E aqui, vive tua igreja em torno a ti
+          Onde se encontrará, a morada eterna
+
+          Verbum caro factum est
+          Verbum panis factum est
+          Verbum caro factum est
+          Verbum panis
+
+          Desde o princípio
+          Quando o universo foi criado da escuridão
+          O verbo estava junto a Deus
+          Veio ao mundo
+          Rico em misericórdia Deus mandou o filho seu
+          Todo a si mesmo como pão
+
+          Verbum caro factum est
+          Verbum panis factum est
+          Verbum caro factum est
+          Verbum panis factum est
+
+          E aqui, partes o teu pão em meio a nós
+          Todo aquele que comer, não terá mais fome
+          E aqui, vive tua igreja em torno a ti
+          Onde se encontrará, a morada eterna
+          E aqui, partes o teu pão em meio a nós
+          Todo aquele que comer, não terá mais fome
+          E aqui, vive tua igreja em torno a ti
+          Onde se encontrará, a morada eterna
+
+          Verbum caro factum est
+          Verbum panis factum est
+          Verbum caro factum est
+          Verbum panis factum est
+        </div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div>
+            <div class="tag-subtitle" style="font-size: 0.75rem; opacity: 0.7;">04 &nbsp; CANTO FINAL</div>
+            <h3 class="serif-title">Salve Regina</h3>
+          </div>
+          <div class="accordion-icon">+</div>
+        </div>
+        <div class="accordion-body">
+          Salve, Regina,
+          Mater misericordiae, vita, dulcedo, et spes nostra, salve. 
+          Ad te clamamus, exsules filii Evae.
+          Ad te suspiramus, gementes et flentes 
+          in hac lacrimarum valle. 
+          Eia ergo, advocata nostra, illos tuos misericordes oculos 
+          ad nos converte.
+          Et Iesum 
+          benedictum fructum ventris tui,
+          nobis, post hoc exsilium, ostende.
+
+          O clemens, 
+          o pia, 
+          o dulcis 
+          Virgo Maria.
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- MODAL PIX -->
+  <div id="modal-pix" class="modal-overlay">
+    <div class="modal-box">
+      <h3 class="serif-title" style="color: var(--blue-dark); font-size: 1.6rem; margin-bottom: 12px;">Apoie a Pastoral</h3>
+      <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">Sua contribuição ajuda a manter nossas atividades e eventos universitários.</p>
+      <div style="background: #f1f5f9; padding: 14px; border-radius: 8px; font-weight: 600; word-break: break-all; font-size: 0.9rem;">
+        pu.unicamp@gmail.com
+      </div>
+      <button class="btn-close" onclick="closePixModal()">Fechar</button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT DE INTERAÇÃO -->
+  <script>
+    // Alternar Abas (Adoração / Missa)
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+
+      document.getElementById('tab-' + tabName).classList.add('active');
+      
+      const activeBtn = Array.from(document.querySelectorAll('.nav-btn')).find(
+        btn => btn.textContent.toLowerCase().includes(tabName)
+      );
+      if(activeBtn) activeBtn.classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Aumentar e restaurar tamanho da fonte
+    let fontState = 0;
+    function toggleFontSize() {
+      const root = document.documentElement;
+      if (fontState === 0) {
+        root.style.setProperty('--font-scale', '1.15');
+        fontState = 1;
+      } else {
+        root.style.setProperty('--font-scale', '1');
+        fontState = 0;
+      }
+    }
+
+    // Accordion dos Cantos
+    function toggleAccordion(element) {
+      element.classList.toggle('open');
+      const icon = element.querySelector('.accordion-icon');
+      if (element.classList.contains('open')) {
+        icon.textContent = '−';
+      } else {
+        icon.textContent = '+';
+      }
+    }
+
+    // Modal PIX
+    function openPixModal() {
+      document.getElementById('modal-pix').classList.add('active');
+    }
+    function closePixModal() {
+      document.getElementById('modal-pix').classList.remove('active');
+    }
+  </script>
 </body>
 </html>
